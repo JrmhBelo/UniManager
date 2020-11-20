@@ -78,7 +78,15 @@ public class Student {
     }
     
 	public Enrolment getEnrolmentByUnitId(int unitId) {
+        for (Enrolment enr:enrolments)
+            if (enr.getUnit().getId() == unitId)
+                return enr;
 		return null;
-	}
+    }
+
+    public void enroll(Unit unit){
+        units.add(unit);
+        unit.getStudents().add(this);
+    }
     
 }
