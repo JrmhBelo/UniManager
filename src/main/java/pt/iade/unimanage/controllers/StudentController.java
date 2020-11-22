@@ -20,6 +20,7 @@ import pt.iade.unimanage.models.Enrolment;
 import pt.iade.unimanage.models.Student;
 import pt.iade.unimanage.models.StudentRepository;
 import pt.iade.unimanage.models.Unit;
+import pt.iade.unimanage.models.UnitRepository;
 import pt.iade.unimanage.models.exceptions.NotFoundException;
 
 
@@ -99,10 +100,9 @@ public class StudentController {
 
 
     @PostMapping(path = "{number}/enrolments",produces= MediaType.APPLICATION_JSON_VALUE)
-    public Enrolment addEnrolment(@PathVariable("number") int number,@RequestBody int unitId)
-        throws NotFoundException,AlreadyExistsException{
-        logger.info("Enroling student with number "+
-        number+" in unit with id "+unitId);
+    public Enrolment addEnrolment(@PathVariable("number") int number,
+    @RequestBody int unitId) throws NotFoundException,AlreadyExistsException {
+        logger.info("Enroling student with number "+ number +" in unit with id "+ unitId);
         Student student = StudentRepository.getStudent(number);
         if (student != null) {
             Unit unit = UnitRepository.getUnit(unitId);
