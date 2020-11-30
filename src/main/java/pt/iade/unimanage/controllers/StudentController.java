@@ -59,6 +59,15 @@ public class StudentController {
         return student;
     }
 
+    @GetMapping(path="{email}", produces=MediaType.APPLICATION_JSON_VALUE)
+    public Student getStudent(@PathVariable("email")String email)
+    throws NotFoundException{
+        logger.info("Sending student with email"+email);
+        Student student=StudentRepository.getStudent(email);
+        if(student!=null)return student;
+        else throw new NotFoundException(""+email,"Student","email");
+    }
+
     @GetMapping(path = "{number}/enrolments", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Enrolment> getEnrolments(@PathVariable("number") int number) throws NotFoundException {
         logger.info("Sending enrolments of student with number " + number);
